@@ -1,0 +1,41 @@
+Inicio de sesión (Login)
+
+El usuario (empleado) puede iniciar sesión con su correo y contraseña.
+
+Verificación vía API del backend.
+
+Gestión de Viajes
+
+Crear un nuevo viaje ingresando ciudad, fecha de inicio y fin.
+
+Ver listado de viajes creados por el usuario.
+
+Consultar estado del viaje (abierto, en proceso, finalizado).
+
+Calcular monto asignado por rubro según salario y porcentaje.
+
+Seleccionar rubros aplicables al viaje (ej: alojamiento, alimentación).
+
+Registro de Gastos
+
+Registrar facturas por cada rubro.
+
+Ingresar valor, fecha, nombre del gasto
+
+Validación para evitar exceder el valor del rubro.
+
+Resumen de Viáticos
+
+Mostrar viáticos asignados, gastados y saldo por cada rubro.
+
+Visualizar total general y diferencias.
+
+Devolución de Saldo
+
+Mostrar valor que debe devolverse a la empresa (si hay sobrante).
+
+
+
+ //opcional 
+Uso de cámara o galería para registrar facturas
+

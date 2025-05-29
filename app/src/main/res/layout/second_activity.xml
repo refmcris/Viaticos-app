@@ -13,6 +13,8 @@
         android:layout_height="wrap_content"
         android:background="#2979FF"
         app:title="Mis viajes"
+        app:menu="@menu/top_app_bar_menu"
+
         app:titleTextColor="@android:color/white"
         app:titleCentered="true"
         app:layout_constraintTop_toTopOf="parent"
@@ -32,10 +34,6 @@
         android:layout_margin="16dp"
         app:tint="@android:color/white"
         app:backgroundTint="@color/blue" />
-
-
-
-
 
 
 

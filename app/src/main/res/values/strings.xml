@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Viaticos</string>
     <string name="logout">Cerrar sesión</string>
+    <string name="back">Regresar</string>
 </resources>

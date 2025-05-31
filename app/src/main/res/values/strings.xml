@@ -1,5 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Viaticos</string>
     <string name="logout">Cerrar sesión</string>
     <string name="back">Regresar</string>
+    <string-array name="tipos_gastos">
+        <item>Alojamiento</item>
+        <item>Alimentación</item>
+        <item>Transporte entre terminales</item>
+        <item>Prima por aeropuerto</item>
+    </string-array>
 </resources>

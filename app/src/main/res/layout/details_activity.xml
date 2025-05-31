@@ -13,7 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="#2979FF"
         android:paddingStart="0dp"
-        android:paddingEnd="16dp"
+        android:paddingEnd="@dimen/margin_horizontal"
         app:contentInsetStartWithNavigation="0dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,52 +27,182 @@
 
             <ImageButton
                 android:id="@+id/backButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_back"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:layout_marginStart="-10dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Botón de retroceso"
-                android:padding="12dp"/>
+                android:padding="12dp"
+                android:src="@drawable/ic_back" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="1dp"
+                android:layout_marginStart="@dimen/margin_horizontal"
                 android:text="Detalles del viaje"
                 android:textColor="@android:color/white"
-                android:textSize="25sp" />
+                android:textSize="@dimen/text_size_title" />
 
         </LinearLayout>
 
     </com.google.android.material.appbar.MaterialToolbar>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="Agregar gasto"
-        android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
-        app:tint="@android:color/white"
-        app:backgroundTint="#2979FF"
-        app:elevation="6dp"
-        app:fabSize="normal"
-        app:rippleColor="#80FFFFFF" />
-
-    <Button
-        android:id="@+id/buttonHistorial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#2979FF"
-        android:padding="12dp"
-        android:text="Ver historial de gastos"
-        android:textColor="#fff"
-        android:minWidth="300dp"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@id/topAppBar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/travelImage"
+                android:layout_width="@dimen/avatar_size"
+                android:layout_height="@dimen/avatar_size"
+                android:layout_marginTop="@dimen/margin_vertical"
+                android:src="@drawable/avatar_travel"
+                android:contentDescription="Imagen del viaje"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/travelTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_horizontal"
+                android:layout_marginTop="@dimen/margin_vertical"
+                android:text="Información del viaje"
+                android:textSize="@dimen/text_size_subtitle"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/travelImage"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/infoCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_horizontal"
+                android:layout_marginTop="@dimen/margin_vertical"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                app:layout_constraintTop_toBottomOf="@id/travelTitle">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/card_padding">
+
+                    <TextView
+                        android:id="@+id/destinoLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Destino"
+                        android:textSize="@dimen/text_size_subtitle"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/destinoValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textSize="@dimen/text_size_body"
+                        tools:text="Ciudad destino" />
+
+                    <TextView
+                        android:id="@+id/fechaLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical"
+                        android:text="Fecha"
+                        android:textSize="@dimen/text_size_subtitle"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/fechaValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textSize="@dimen/text_size_body"
+                        tools:text="01.01.2024" />
+
+                    <TextView
+                        android:id="@+id/gastoTotalLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical"
+                        android:text="Gasto Total"
+                        android:textSize="@dimen/text_size_subtitle"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/gastoTotalValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textSize="@dimen/text_size_body"
+                        tools:text="$1000.00" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/gastosTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_horizontal"
+                android:layout_marginTop="@dimen/margin_vertical"
+                android:text="Lista de gastos"
+                android:textSize="@dimen/text_size_subtitle"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/infoCard"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerGastos"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="@dimen/margin_horizontal"
+                android:layout_marginTop="@dimen/margin_vertical"
+                android:clipToPadding="false"
+                android:paddingBottom="@dimen/margin_vertical"
+                app:layout_constraintTop_toBottomOf="@id/gastosTitle"
+                app:layout_constraintBottom_toTopOf="@id/buttonHistorial" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="Agregar gasto"
+                android:src="@drawable/ic_add"
+                android:layout_margin="@dimen/margin_horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:tint="@android:color/white"
+                app:backgroundTint="#2979FF" />
+
+            <Button
+                android:id="@+id/buttonHistorial"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/input_height"
+                android:backgroundTint="#2979FF"
+                android:padding="12dp"
+                android:text="Ver historial de gastos"
+                android:textColor="#fff"
+                android:minWidth="@dimen/button_min_width"
+                android:layout_marginBottom="@dimen/margin_vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,8 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="#2979FF"
         android:paddingStart="0dp"
-        android:paddingEnd="16dp"
-        android:elevation="4dp"
+        android:paddingEnd="@dimen/margin_horizontal"
         app:contentInsetStartWithNavigation="0dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,8 +27,8 @@
 
             <ImageButton
                 android:id="@+id/backButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
                 android:layout_marginStart="-10dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Botón de retroceso"
@@ -39,170 +38,191 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="1dp"
-                android:text="Nuevos viajes"
+                android:layout_marginStart="@dimen/margin_horizontal"
+                android:text="Nuevo viaje"
                 android:textColor="@android:color/white"
-                android:textSize="25sp" />
+                android:textSize="@dimen/text_size_title" />
 
         </LinearLayout>
 
     </com.google.android.material.appbar.MaterialToolbar>
 
-    <ImageView
-        android:id="@+id/avatarTravel"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/avatar_travel"
-        android:contentDescription="Imagen de viaje"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@id/topAppBar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <TextView
-        android:id="@+id/destinoTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Destino"
-        android:textColor="@android:color/black"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@id/avatarTravel"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/destinoLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
-        app:endIconMode="clear_text"
-        app:layout_constraintTop_toBottomOf="@id/destinoTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/destinoInput"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ciudad"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:paddingBottom="@dimen/margin_vertical">
 
-    <TextView
-        android:id="@+id/fechaInicioTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fecha de Inicio"
-        android:textColor="@android:color/black"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/destinoLayout"
-        app:layout_constraintStart_toStartOf="parent"/>
+            <ImageView
+                android:id="@+id/avatarTravel"
+                android:layout_width="@dimen/avatar_size"
+                android:layout_height="@dimen/avatar_size"
+                android:layout_marginTop="@dimen/margin_vertical"
+                android:src="@drawable/avatar_travel"
+                android:contentDescription="Imagen de viaje"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/fechaInicioLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
-        app:endIconMode="custom"
-        app:endIconDrawable="@drawable/ic_calendar"
-        app:layout_constraintTop_toBottomOf="@id/fechaInicioTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+            <TextView
+                android:id="@+id/destinoTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Destino"
+                android:textColor="@android:color/black"
+                android:layout_marginStart="@dimen/margin_horizontal"
+                android:layout_marginTop="@dimen/margin_vertical"
+                android:textSize="@dimen/text_size_subtitle"
+                app:layout_constraintTop_toBottomOf="@id/avatarTravel"
+                app:layout_constraintStart_toStartOf="parent"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/fechaInicioInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="DD.MM.YYYY"
-            android:inputType="none"
-            android:focusable="false"
-            android:clickable="true"
-            android:cursorVisible="false" />
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/destinoLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_horizontal"
+                android:layout_marginTop="8dp"
+                app:endIconMode="clear_text"
+                app:layout_constraintTop_toBottomOf="@id/destinoTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-    <TextView
-        android:id="@+id/fechaFinTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fecha de Finalización"
-        android:textColor="@android:color/black"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/fechaInicioLayout"
-        app:layout_constraintStart_toStartOf="parent"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/destinoInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_height"
+                    android:hint="Ciudad"
+                    android:textSize="@dimen/text_size_body"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/fechaFinLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
-        app:endIconMode="custom"
-        app:endIconDrawable="@drawable/ic_calendar"
-        app:layout_constraintTop_toBottomOf="@id/fechaFinTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+            <TextView
+                android:id="@+id/fechaInicioTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha de Inicio"
+                android:textColor="@android:color/black"
+                android:layout_marginStart="@dimen/margin_horizontal"
+                android:layout_marginTop="@dimen/margin_vertical"
+                android:textSize="@dimen/text_size_subtitle"
+                app:layout_constraintTop_toBottomOf="@id/destinoLayout"
+                app:layout_constraintStart_toStartOf="parent"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/fechaFinInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="DD.MM.YYYY"
-            android:inputType="none"
-            android:focusable="false"
-            android:clickable="true"
-            android:cursorVisible="false" />
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fechaInicioLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_horizontal"
+                android:layout_marginTop="8dp"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_calendar"
+                app:layout_constraintTop_toBottomOf="@id/fechaInicioTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-    <TextView
-        android:id="@+id/limiteGastosTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Límite de gastos"
-        android:textColor="@android:color/black"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/fechaFinLayout"
-        app:layout_constraintStart_toStartOf="parent"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fechaInicioInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_height"
+                    android:hint="DD.MM.YYYY"
+                    android:textSize="@dimen/text_size_body"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:cursorVisible="false" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/limiteGastosLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
-        app:endIconMode="custom"
-        app:endIconDrawable="@drawable/ic_money"
-        app:layout_constraintTop_toBottomOf="@id/limiteGastosTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+            <TextView
+                android:id="@+id/fechaFinTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha de Finalización"
+                android:textColor="@android:color/black"
+                android:layout_marginStart="@dimen/margin_horizontal"
+                android:layout_marginTop="@dimen/margin_vertical"
+                android:textSize="@dimen/text_size_subtitle"
+                app:layout_constraintTop_toBottomOf="@id/fechaInicioLayout"
+                app:layout_constraintStart_toStartOf="parent"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/limiteGastosInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Ingrese el límite"
-            android:inputType="numberDecimal" />
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fechaFinLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_horizontal"
+                android:layout_marginTop="8dp"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_calendar"
+                app:layout_constraintTop_toBottomOf="@id/fechaFinTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-    <Button
-        android:id="@+id/buttonCrear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#2979FF"
-        android:minWidth="300dp"
-        android:padding="12dp"
-        android:text="Crear"
-        android:textColor="#fff"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topAppBar"
-        app:layout_constraintVertical_bias="0.913" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fechaFinInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_height"
+                    android:hint="DD.MM.YYYY"
+                    android:textSize="@dimen/text_size_body"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:cursorVisible="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/limiteGastosTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Límite de gastos"
+                android:textColor="@android:color/black"
+                android:layout_marginStart="@dimen/margin_horizontal"
+                android:layout_marginTop="@dimen/margin_vertical"
+                android:textSize="@dimen/text_size_subtitle"
+                app:layout_constraintTop_toBottomOf="@id/fechaFinLayout"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/limiteGastosLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_horizontal"
+                android:layout_marginTop="8dp"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_money"
+                app:layout_constraintTop_toBottomOf="@id/limiteGastosTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/limiteGastosInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_height"
+                    android:hint="Ingrese el límite"
+                    android:textSize="@dimen/text_size_body"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/buttonCrear"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/input_height"
+                android:backgroundTint="#2979FF"
+                android:minWidth="@dimen/button_min_width"
+                android:padding="12dp"
+                android:text="Crear"
+                android:textColor="#fff"
+                android:textSize="@dimen/text_size_body"
+                android:layout_marginTop="@dimen/margin_vertical"
+                app:layout_constraintTop_toBottomOf="@id/limiteGastosLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

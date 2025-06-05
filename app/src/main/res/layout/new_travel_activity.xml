@@ -59,28 +59,19 @@
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/margin_vertical">
 
-            <ImageView
-                android:id="@+id/avatarTravel"
-                android:layout_width="@dimen/avatar_size"
-                android:layout_height="@dimen/avatar_size"
-                android:layout_marginTop="@dimen/margin_vertical"
-                android:src="@drawable/avatar_travel"
-                android:contentDescription="Imagen de viaje"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
                 android:id="@+id/destinoTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_horizontal"
+                android:layout_marginTop="8dp"
                 android:text="Destino"
                 android:textColor="@android:color/black"
-                android:layout_marginStart="@dimen/margin_horizontal"
-                android:layout_marginTop="@dimen/margin_vertical"
+
                 android:textSize="@dimen/text_size_subtitle"
-                app:layout_constraintTop_toBottomOf="@id/avatarTravel"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/destinoLayout"

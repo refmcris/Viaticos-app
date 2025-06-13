@@ -10,6 +10,9 @@ public interface InvoiceDao {
     @Query("SELECT * FROM invoices WHERE travelId = :travelId")
     LiveData<List<Invoice>> getInvoicesByTravel(int travelId);
 
+    @Query("SELECT * FROM invoices WHERE travelId = :travelId")
+    List<Invoice> getInvoicesByTravelId(int travelId);
+
     @Query("SELECT * FROM invoices WHERE invoiceId = :id")
     Invoice getInvoiceById(int id);
 

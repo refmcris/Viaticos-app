@@ -9,10 +9,12 @@ public class Category {
     private int categoryId;
     private String name;
     private String description;
+    private double defaultPercentage;
 
-    public Category(String name, String description) {
+    public Category(String name, String description, double defaultPercentage) {
         this.name = name;
         this.description = description;
+        this.defaultPercentage = defaultPercentage;
     }
 
     // Getters and Setters
@@ -38,5 +40,13 @@ public class Category {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getDefaultPercentage() {
+        return defaultPercentage;
+    }
+
+    public void setDefaultPercentage(double defaultPercentage) {
+        this.defaultPercentage = defaultPercentage;
     }
 } 

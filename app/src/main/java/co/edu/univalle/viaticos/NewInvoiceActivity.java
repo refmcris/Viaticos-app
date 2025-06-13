@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
+import android.widget.Toast;
+import android.content.Intent;
+import android.widget.Button;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -12,16 +15,43 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
+
+import co.edu.univalle.viaticos.data.AppDatabase;
+import co.edu.univalle.viaticos.data.dao.CategoryDao;
+import co.edu.univalle.viaticos.data.dao.InvoiceDao;
+import co.edu.univalle.viaticos.data.dao.TravelCategoryDao;
+import co.edu.univalle.viaticos.data.entity.Category;
+import co.edu.univalle.viaticos.data.entity.Invoice;
+import co.edu.univalle.viaticos.data.entity.TravelCategory;
 
 public class NewInvoiceActivity extends AppCompatActivity {
 
+    private TextInputEditText nombreGastoInput;
+    private TextInputEditText cantidadInput;
     private TextInputEditText fechaInput;
     private TextInputLayout fechaLayout;
-    private Calendar calendar;
     private AutoCompleteTextView tipoGastoInput;
+    private Button buttonGuardar;
+    private ImageButton backButton;
+
+    private Calendar calendar;
+    private int travelId;
+    private InvoiceDao invoiceDao;
+    private CategoryDao categoryDao;
+    private TravelCategoryDao travelCategoryDao;
+    private ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private HashMap<String, Integer> categoryNameToIdMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,35 +65,66 @@ public class NewInvoiceActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Obtener el ID del viaje del intent
+        travelId = getIntent().getIntExtra("TRAVEL_ID", -1);
+        if (travelId == -1) {
+            Toast.makeText(this, "Error: ID de viaje no identificado", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
         // Inicializar vistas y calendario
         initializeViews();
         setupDatePicker();
         setupBackButton();
-        setupTipoGasto();
+        setupCategorySpinner();
+
+        // Inicializar la base de datos y DAOs
+        AppDatabase db = AppDatabase.getDatabase(this);
+        invoiceDao = db.invoiceDao();
+        categoryDao = db.categoryDao();
+        travelCategoryDao = db.travelCategoryDao();
+
+        // Configurar listener para el botón de guardar
+        buttonGuardar.setOnClickListener(v -> saveInvoice());
     }
 
     private void initializeViews() {
+        nombreGastoInput = findViewById(R.id.nombreGastoInput);
+        cantidadInput = findViewById(R.id.cantidadInput);
         fechaInput = findViewById(R.id.fechaInput);
         fechaLayout = findViewById(R.id.fechaLayout);
-        calendar = Calendar.getInstance();
         tipoGastoInput = findViewById(R.id.tipoGastoInput);
+        buttonGuardar = findViewById(R.id.buttonGuardar);
+        backButton = findViewById(R.id.backButton);
+        calendar = Calendar.getInstance();
     }
 
-    private void setupTipoGasto() {
-        // Obtener el array de tipos de gastos desde resources
-        String[] tiposGastos = getResources().getStringArray(R.array.tipos_gastos);
-        
-        // Crear y configurar el adaptador
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-            this,
-            android.R.layout.simple_dropdown_item_1line,
-            tiposGastos
-        );
-        
-        tipoGastoInput.setAdapter(adapter);
-        
-        // Hacer que el campo no sea editable manualmente
-        tipoGastoInput.setKeyListener(null);
+    private void setupCategorySpinner() {
+        executorService.execute(() -> {
+            List<TravelCategory> travelCategories = travelCategoryDao.getTravelCategoriesByTravelId(travelId);
+            List<String> categoryNames = new ArrayList<>();
+
+            for (TravelCategory tc : travelCategories) {
+                Category category = categoryDao.getCategoryById(tc.getCategoryId());
+                if (category != null) {
+                    categoryNames.add(category.getName());
+                    categoryNameToIdMap.put(category.getName(), category.getCategoryId());
+                }
+            }
+
+            runOnUiThread(() -> {
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                        this,
+                        android.R.layout.simple_dropdown_item_1line,
+                        categoryNames
+                );
+                tipoGastoInput.setAdapter(adapter);
+
+                // Hacer que el campo no sea editable manualmente
+                tipoGastoInput.setKeyListener(null);
+            });
+        });
     }
 
     private void setupDatePicker() {
@@ -74,20 +135,17 @@ public class NewInvoiceActivity extends AppCompatActivity {
             updateLabel();
         };
 
-        // Configurar el click en el campo de fecha
         fechaInput.setOnClickListener(v -> showDatePicker(dateSetListener));
-
-        // Configurar el click en el ícono del calendario
         fechaLayout.setEndIconOnClickListener(v -> showDatePicker(dateSetListener));
     }
 
     private void showDatePicker(DatePickerDialog.OnDateSetListener dateSetListener) {
         new DatePickerDialog(
-            NewInvoiceActivity.this,
-            dateSetListener,
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
+                NewInvoiceActivity.this,
+                dateSetListener,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
         ).show();
     }
 
@@ -97,7 +155,68 @@ public class NewInvoiceActivity extends AppCompatActivity {
     }
 
     private void setupBackButton() {
-        ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> onBackPressed());
+    }
+
+    private void saveInvoice() {
+        String description = nombreGastoInput.getText().toString().trim();
+        String amountStr = cantidadInput.getText().toString().trim();
+        String dateStr = fechaInput.getText().toString().trim();
+        String categoryName = tipoGastoInput.getText().toString().trim();
+
+        if (description.isEmpty() || amountStr.isEmpty() || dateStr.isEmpty() || categoryName.isEmpty()) {
+            Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        double amount = 0.0;
+        try {
+            amount = Double.parseDouble(amountStr);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Formato de cantidad inválido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Date date = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        try {
+            date = dateFormat.parse(dateStr);
+        } catch (ParseException e) {
+            Toast.makeText(this, "Formato de fecha inválido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Integer categoryId = categoryNameToIdMap.get(categoryName);
+        if (categoryId == null) {
+            Toast.makeText(this, "Categoría seleccionada inválida", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        final Date finalDate = date;
+        final double finalAmount = amount;
+        final int finalCategoryId = categoryId;
+
+        executorService.execute(() -> {
+            Invoice newInvoice = new Invoice(
+                    travelId,
+                    finalDate,
+                    finalAmount,
+                    description,
+                    finalCategoryId
+            );
+
+            invoiceDao.insertInvoice(newInvoice);
+
+            runOnUiThread(() -> {
+                Toast.makeText(NewInvoiceActivity.this, "Factura guardada con éxito", Toast.LENGTH_SHORT).show();
+                finish(); // Regresar a la actividad anterior (DetailsActivity)
+            });
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        executorService.shutdown();
     }
 }

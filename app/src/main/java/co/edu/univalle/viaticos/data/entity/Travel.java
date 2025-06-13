@@ -23,14 +23,20 @@ public class Travel {
     private Date endDate;
     private double totalSpent;
     private boolean status;
+    private double travelBudget;
+    private boolean isCompleted;
+    private Date completionDate;
 
-    public Travel(int employeeId, String destinationCity, Date startDate, Date endDate, double totalSpent, boolean status) {
+    public Travel(int employeeId, String destinationCity, Date startDate, Date endDate, double totalSpent, boolean status, double travelBudget) {
         this.employeeId = employeeId;
         this.destinationCity = destinationCity;
         this.startDate = startDate;
         this.endDate = endDate;
         this.totalSpent = totalSpent;
         this.status = status;
+        this.travelBudget = travelBudget;
+        this.isCompleted = false;
+        this.completionDate = null;
     }
 
     // Getters and Setters
@@ -88,5 +94,32 @@ public class Travel {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public double getTravelBudget() {
+        return travelBudget;
+    }
+
+    public void setTravelBudget(double travelBudget) {
+        this.travelBudget = travelBudget;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
+        if (completed) {
+            this.completionDate = new Date();
+        }
+    }
+
+    public Date getCompletionDate() {
+        return completionDate;
+    }
+
+    public void setCompletionDate(Date completionDate) {
+        this.completionDate = completionDate;
     }
 } 

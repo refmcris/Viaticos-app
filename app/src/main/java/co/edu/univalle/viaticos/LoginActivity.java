@@ -2,6 +2,7 @@ package co.edu.univalle.viaticos;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import co.edu.univalle.viaticos.data.dao.UserDao;
 import co.edu.univalle.viaticos.data.entity.User;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = "LoginActivity";
     private EditText emailEditText;
     private EditText passwordEditText;
     private Button loginButton;
@@ -36,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         // Inicializar vistas
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
-        loginButton = findViewById(R.id.loginButton);
+        loginButton = findViewById(R.id.buttonSignIn);
 
         // Configurar el listener del botón de login
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -59,13 +61,19 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 if (user != null && user.getPassword().equals(password)) {
-                                    // Login exitoso
-                                    Intent intent = new Intent(LoginActivity.this, TravelActivity.class);
-                                    intent.putExtra("USER_ID", user.getEmployeeId());
-                                    startActivity(intent);
-                                    finish();
+                                    Log.d(TAG, "Login exitoso para usuario: " + user.getEmployeeId());
+                                    try {
+                                        Intent intent = new Intent(LoginActivity.this, TravelActivity.class);
+                                        intent.putExtra("USER_ID", user.getEmployeeId());
+                                        Log.d(TAG, "Iniciando TravelActivity con USER_ID: " + user.getEmployeeId());
+                                        startActivity(intent);
+                                        finish();
+                                    } catch (Exception e) {
+                                        Log.e(TAG, "Error al iniciar TravelActivity: " + e.getMessage());
+                                        e.printStackTrace();
+                                    }
                                 } else {
-                                    // Login fallido
+                                    Log.d(TAG, "Login fallido - Usuario no encontrado o contraseña incorrecta");
                                     Toast.makeText(LoginActivity.this, "Credenciales inválidas", Toast.LENGTH_SHORT).show();
                                 }
                             }

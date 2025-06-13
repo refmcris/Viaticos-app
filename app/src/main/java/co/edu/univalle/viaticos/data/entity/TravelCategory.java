@@ -2,45 +2,31 @@ package co.edu.univalle.viaticos.data.entity;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.PrimaryKey;
+import androidx.room.Index;
 
-@Entity(
-    tableName = "travel_categories",
+@Entity(tableName = "travel_categories",
+    primaryKeys = {"travelId", "categoryId"},
     foreignKeys = {
-        @ForeignKey(
-            entity = Travel.class,
+        @ForeignKey(entity = Travel.class,
             parentColumns = "travelId",
             childColumns = "travelId",
-            onDelete = ForeignKey.CASCADE
-        ),
-        @ForeignKey(
-            entity = Category.class,
+            onDelete = ForeignKey.CASCADE),
+        @ForeignKey(entity = Category.class,
             parentColumns = "categoryId",
             childColumns = "categoryId",
-            onDelete = ForeignKey.CASCADE
-        )
-    }
+            onDelete = ForeignKey.CASCADE)
+    },
+    indices = {@Index(value = {"travelId", "categoryId"}, unique = true)}
 )
 public class TravelCategory {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
     private int travelId;
     private int categoryId;
-    private double amount;
+    private double percentage;
 
-    public TravelCategory(int travelId, int categoryId, double amount) {
+    public TravelCategory(int travelId, int categoryId, double percentage) {
         this.travelId = travelId;
         this.categoryId = categoryId;
-        this.amount = amount;
-    }
-
-    // Getters and Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.percentage = percentage;
     }
 
     public int getTravelId() {
@@ -59,11 +45,11 @@ public class TravelCategory {
         this.categoryId = categoryId;
     }
 
-    public double getAmount() {
-        return amount;
+    public double getPercentage() {
+        return percentage;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setPercentage(double percentage) {
+        this.percentage = percentage;
     }
 } 

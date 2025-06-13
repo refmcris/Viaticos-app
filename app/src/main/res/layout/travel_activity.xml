@@ -36,11 +36,11 @@
                 android:layout_marginStart="16dp"/>
 
             <ImageButton
-                android:id="@+id/backButton"
+                android:id="@+id/exitButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Cerrar sesión"
+                android:contentDescription="Salir"
                 android:padding="12dp"
                 android:src="@drawable/ic_logout" />
 

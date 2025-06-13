@@ -15,18 +15,16 @@ import java.util.Locale;
 import co.edu.univalle.viaticos.data.entity.Travel;
 
 public class TravelAdapter extends RecyclerView.Adapter<TravelAdapter.TravelViewHolder> {
-    private List<Travel> travelList;
+    private List<Travel> travels;
     private OnTravelClickListener listener;
-    private SimpleDateFormat dateFormat;
 
     public interface OnTravelClickListener {
         void onTravelClick(Travel travel);
     }
 
-    public TravelAdapter(List<Travel> travelList, OnTravelClickListener listener) {
-        this.travelList = travelList;
+    public TravelAdapter(List<Travel> travels, OnTravelClickListener listener) {
+        this.travels = travels;
         this.listener = listener;
-        this.dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
     }
 
     @NonNull
@@ -39,40 +37,45 @@ public class TravelAdapter extends RecyclerView.Adapter<TravelAdapter.TravelView
 
     @Override
     public void onBindViewHolder(@NonNull TravelViewHolder holder, int position) {
-        Travel travel = travelList.get(position);
+        Travel travel = travels.get(position);
         holder.bind(travel, listener);
     }
 
     @Override
     public int getItemCount() {
-        return travelList.size();
+        return travels != null ? travels.size() : 0;
     }
 
-    class TravelViewHolder extends RecyclerView.ViewHolder {
-        private TextView destinationTextView;
-        private TextView dateTextView;
-        private TextView amountTextView;
-        private TextView statusTextView;
+    public void updateTravels(List<Travel> newTravels) {
+        this.travels = newTravels;
+        notifyDataSetChanged();
+    }
+
+    static class TravelViewHolder extends RecyclerView.ViewHolder {
+        private TextView cityName;
+        private TextView dateRange;
+        private TextView budget;
 
         public TravelViewHolder(@NonNull View itemView) {
             super(itemView);
-            destinationTextView = itemView.findViewById(R.id.destinationTextView);
-            dateTextView = itemView.findViewById(R.id.dateTextView);
-            amountTextView = itemView.findViewById(R.id.amountTextView);
-            statusTextView = itemView.findViewById(R.id.statusTextView);
+            cityName = itemView.findViewById(R.id.cityName);
+            dateRange = itemView.findViewById(R.id.dateRange);
+            budget = itemView.findViewById(R.id.budget);
         }
 
-        public void bind(final Travel travel, final OnTravelClickListener listener) {
-            destinationTextView.setText(travel.getDestinationCity());
-            dateTextView.setText(String.format("%s - %s",
+        public void bind(Travel travel, OnTravelClickListener listener) {
+            cityName.setText(travel.getDestinationCity());
+            
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+            String dateRangeText = String.format("%s - %s",
                     dateFormat.format(travel.getStartDate()),
-                    dateFormat.format(travel.getEndDate())));
-            amountTextView.setText(String.format("$%.2f", travel.getTotalSpent()));
-            statusTextView.setText(travel.isStatus() ? "Aprobado" : "Pendiente");
+                    dateFormat.format(travel.getEndDate()));
+            dateRange.setText(dateRangeText);
+            
+            budget.setText(String.format(Locale.getDefault(), "$%,.2f", travel.getTravelBudget()));
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            itemView.setOnClickListener(v -> {
+                if (listener != null) {
                     listener.onTravelClick(travel);
                 }
             });

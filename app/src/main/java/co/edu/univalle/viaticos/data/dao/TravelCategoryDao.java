@@ -10,6 +10,9 @@ public interface TravelCategoryDao {
     @Query("SELECT * FROM travel_categories WHERE travelId = :travelId")
     LiveData<List<TravelCategory>> getCategoriesByTravel(int travelId);
 
+    @Query("SELECT * FROM travel_categories WHERE travelId = :travelId")
+    List<TravelCategory> getTravelCategoriesByTravelId(int travelId);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insertTravelCategory(TravelCategory travelCategory);
 

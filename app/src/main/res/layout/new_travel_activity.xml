@@ -97,7 +97,7 @@
                 android:id="@+id/fechaInicioTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fecha de Inicio"
+                android:text="Fecha inicio"
                 android:textColor="@android:color/black"
                 android:layout_marginStart="@dimen/margin_horizontal"
                 android:layout_marginTop="@dimen/margin_vertical"
@@ -133,7 +133,7 @@
                 android:id="@+id/fechaFinTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fecha de Finalización"
+                android:text="Fecha fin"
                 android:textColor="@android:color/black"
                 android:layout_marginStart="@dimen/margin_horizontal"
                 android:layout_marginTop="@dimen/margin_vertical"
@@ -166,10 +166,10 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/limiteGastosTitle"
+                android:id="@+id/categoriesTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Límite de gastos"
+                android:text="Categorías"
                 android:textColor="@android:color/black"
                 android:layout_marginStart="@dimen/margin_horizontal"
                 android:layout_marginTop="@dimen/margin_vertical"
@@ -177,26 +177,49 @@
                 app:layout_constraintTop_toBottomOf="@id/fechaFinLayout"
                 app:layout_constraintStart_toStartOf="parent"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/limiteGastosLayout"
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupCategories"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_horizontal"
                 android:layout_marginTop="8dp"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/ic_money"
-                app:layout_constraintTop_toBottomOf="@id/limiteGastosTitle"
+                app:chipSpacingHorizontal="8dp"
+                app:chipSpacingVertical="8dp"
+                app:selectionRequired="false"
+                app:singleSelection="false"
+                app:layout_constraintTop_toBottomOf="@id/categoriesTitle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/limiteGastosInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/input_height"
-                    android:hint="Ingrese el límite"
-                    android:textSize="@dimen/text_size_body"
-                    android:inputType="numberDecimal" />
-            </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipAlojamiento"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alojamiento" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipViajes"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Viajes" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipComidas"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Comidas" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipOtros"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Otros" />
+
+            </com.google.android.material.chip.ChipGroup>
 
             <Button
                 android:id="@+id/buttonCrear"
@@ -209,7 +232,7 @@
                 android:textColor="#fff"
                 android:textSize="@dimen/text_size_body"
                 android:layout_marginTop="@dimen/margin_vertical"
-                app:layout_constraintTop_toBottomOf="@id/limiteGastosLayout"
+                app:layout_constraintTop_toBottomOf="@id/chipGroupCategories"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 

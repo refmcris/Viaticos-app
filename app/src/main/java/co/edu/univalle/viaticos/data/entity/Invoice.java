@@ -21,12 +21,14 @@ public class Invoice {
     private Date date;
     private double amount;
     private String description;
+    private int categoryId;
 
-    public Invoice(int travelId, Date date, double amount, String description) {
+    public Invoice(int travelId, Date date, double amount, String description, int categoryId) {
         this.travelId = travelId;
         this.date = date;
         this.amount = amount;
         this.description = description;
+        this.categoryId = categoryId;
     }
 
     // Getters and Setters
@@ -68,5 +70,13 @@ public class Invoice {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 } 

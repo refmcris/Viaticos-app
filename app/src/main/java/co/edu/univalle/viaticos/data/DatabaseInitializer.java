@@ -37,7 +37,7 @@ public class DatabaseInitializer {
                         "Administrador",
                         "123456789",
                         "a",
-                        2000000.0,
+                        5000000.0,
                         "a"
                     );
                     long userId = userDao.insertUser(adminUser);
@@ -53,7 +53,7 @@ public class DatabaseInitializer {
                     };
 
                     for (Object[] categoria : defaultCategories) {
-                        if (categoryDao.getCategoryByName((String)categoria[0]) == null) { // Verificar si la categoría ya existe
+                        if (categoryDao.getCategoryByName((String)categoria[0]) == null) {
                             Category cat = new Category(
                                 (String)categoria[0], 
                                 (String)categoria[1],
@@ -81,21 +81,21 @@ public class DatabaseInitializer {
                                 "Medellin",
                                 sdf.parse("2025-03-20"),
                                 sdf.parse("2025-04-10"),
-                                500.00,
+                                500000.00,
                                 true,
-                                1000.00 // Límite de gasto para este viaje
+                                1000000.00
                         );
                         long travel1Id = travelDao.insertTravel(travel1);
                         travelCategoryDao.insertTravelCategory(new TravelCategory((int) travel1Id, transporteId, 50.0));
                         travelCategoryDao.insertTravelCategory(new TravelCategory((int) travel1Id, alimentacionId, 50.0));
 
                         // Facturas de ejemplo para el Viaje 1 (Medellín)
-                        InvoiceDao invoiceDao = database.invoiceDao(); // Inicializar InvoiceDao aquí
-                        Invoice invoice1_1 = new Invoice((int) travel1Id, sdf.parse("2025-03-25"), 150.00, "Pasaje de bus Medellín", transporteId);
+                        InvoiceDao invoiceDao = database.invoiceDao();
+                        Invoice invoice1_1 = new Invoice((int) travel1Id, sdf.parse("2025-03-25"), 150000.00, "Pasaje de bus Medellín", transporteId);
                         invoiceDao.insertInvoice(invoice1_1);
-                        Invoice invoice1_2 = new Invoice((int) travel1Id, sdf.parse("2025-03-26"), 50.00, "Almuerzo restaurante", alimentacionId);
+                        Invoice invoice1_2 = new Invoice((int) travel1Id, sdf.parse("2025-03-26"), 50000.00, "Almuerzo restaurante", alimentacionId);
                         invoiceDao.insertInvoice(invoice1_2);
-                        Invoice invoice1_3 = new Invoice((int) travel1Id, sdf.parse("2025-03-27"), 80.00, "Hotel primera noche", hospedajeId);
+                        Invoice invoice1_3 = new Invoice((int) travel1Id, sdf.parse("2025-03-27"), 80000.00, "Hotel primera noche", hospedajeId);
                         invoiceDao.insertInvoice(invoice1_3);
 
                         Travel travel2 = new Travel(
@@ -103,18 +103,18 @@ public class DatabaseInitializer {
                                 "Bogota",
                                 sdf.parse("2025-05-01"),
                                 sdf.parse("2025-05-15"),
-                                750.50,
+                                750000.50,
                                 false,
-                                1500.00 // Límite de gasto para este viaje
+                                1500000.00
                         );
                         long travel2Id = travelDao.insertTravel(travel2);
                         travelCategoryDao.insertTravelCategory(new TravelCategory((int) travel2Id, hospedajeId, 70.0));
                         travelCategoryDao.insertTravelCategory(new TravelCategory((int) travel2Id, otrosId, 30.0));
 
                         // Facturas de ejemplo para el Viaje 2 (Bogotá)
-                        Invoice invoice2_1 = new Invoice((int) travel2Id, sdf.parse("2025-05-05"), 200.00, "Hotel en el centro", hospedajeId);
+                        Invoice invoice2_1 = new Invoice((int) travel2Id, sdf.parse("2025-05-05"), 200000.00, "Hotel en el centro", hospedajeId);
                         invoiceDao.insertInvoice(invoice2_1);
-                        Invoice invoice2_2 = new Invoice((int) travel2Id, sdf.parse("2025-05-06"), 75.00, "Entrada a museo", otrosId);
+                        Invoice invoice2_2 = new Invoice((int) travel2Id, sdf.parse("2025-05-06"), 75000.00, "Entrada a museo", otrosId);
                         invoiceDao.insertInvoice(invoice2_2);
 
                         Travel travel3 = new Travel(
@@ -122,18 +122,18 @@ public class DatabaseInitializer {
                                 "Cali",
                                 sdf.parse("2025-06-10"),
                                 sdf.parse("2025-06-20"),
-                                300.25,
+                                300000.25,
                                 true,
-                                600.00 // Límite de gasto para este viaje
+                                600000.00
                         );
                         long travel3Id = travelDao.insertTravel(travel3);
                         travelCategoryDao.insertTravelCategory(new TravelCategory((int) travel3Id, transporteId, 40.0));
                         travelCategoryDao.insertTravelCategory(new TravelCategory((int) travel3Id, alimentacionId, 60.0));
 
                         // Facturas de ejemplo para el Viaje 3 (Cali)
-                        Invoice invoice3_1 = new Invoice((int) travel3Id, sdf.parse("2025-06-12"), 40.00, "Cena típica", alimentacionId);
+                        Invoice invoice3_1 = new Invoice((int) travel3Id, sdf.parse("2025-06-12"), 40000.00, "Cena típica", alimentacionId);
                         invoiceDao.insertInvoice(invoice3_1);
-                        Invoice invoice3_2 = new Invoice((int) travel3Id, sdf.parse("2025-06-15"), 20.00, "Taxi al aeropuerto", transporteId);
+                        Invoice invoice3_2 = new Invoice((int) travel3Id, sdf.parse("2025-06-15"), 20000.00, "Taxi al aeropuerto", transporteId);
                         invoiceDao.insertInvoice(invoice3_2);
 
                         Log.d(TAG, "Viajes de ejemplo y categorías asignadas creados para el usuario administrador");

@@ -95,7 +95,7 @@ public class DetailsActivity extends AppCompatActivity {
             if (travel != null && !travel.isCompleted()) {
                 Intent intent = new Intent(DetailsActivity.this, NewInvoiceActivity.class);
                 intent.putExtra("TRAVEL_ID", travelId);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             } else {
                 Toast.makeText(this, "No se pueden agregar gastos a un viaje finalizado", Toast.LENGTH_SHORT).show();
             }
@@ -119,23 +119,32 @@ public class DetailsActivity extends AppCompatActivity {
         setupButtons();
     }
 
-    private void loadTravelDetails() {
-        if (travelId == -1) {
-            // Manejar error si no se recibe un TRAVEL_ID válido
-            return;
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadTravelDetails();
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            loadTravelDetails();
+        }
+    }
+
+    private void loadTravelDetails() {
         executorService.execute(() -> {
             travel = travelDao.getTravelById(travelId);
             if (travel != null) {
                 User user = userDao.getUserById(travel.getEmployeeId());
                 List<Invoice> invoices = invoiceDao.getInvoicesByTravelId(travelId);
 
-                double tempTotalExpenses = 0.0; // Variable temporal para el cálculo
+                double tempTotalExpenses = 0.0;
                 for (Invoice invoice : invoices) {
                     tempTotalExpenses += invoice.getAmount();
                 }
-                final double totalExpenses = tempTotalExpenses; // Variable final para usar en la lambda
+                final double totalExpenses = tempTotalExpenses;
 
                 List<TravelCategory> travelCategories = travelCategoryDao.getTravelCategoriesByTravelId(travelId);
                 List<String> categoryTexts = new ArrayList<>();
@@ -188,16 +197,12 @@ public class DetailsActivity extends AppCompatActivity {
                         buttonFinalizar.setVisibility(travel.isCompleted() ? View.GONE : View.VISIBLE);
                     }
 
-                    FloatingActionButton fab = findViewById(R.id.fab);
-                    fab.setVisibility(travel.isCompleted() ? View.GONE : View.VISIBLE);
-
-                    // Mostrar estado del viaje
+                    // Actualizar estado del viaje
                     TextView estadoText = findViewById(R.id.estadoText);
                     if (estadoText != null) {
-                        estadoText.setText(travel.isCompleted() ? "Finalizado" : "En curso");
+                        estadoText.setText(travel.isCompleted() ? "Viaje finalizado" : "Viaje en curso");
                         estadoText.setTextColor(getResources().getColor(
-                            travel.isCompleted() ? android.R.color.holo_green_dark : android.R.color.holo_blue_dark
-                        ));
+                            travel.isCompleted() ? android.R.color.holo_red_dark : android.R.color.holo_green_dark));
                     }
                 });
             }

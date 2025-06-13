@@ -31,9 +31,11 @@ import co.edu.univalle.viaticos.data.AppDatabase;
 import co.edu.univalle.viaticos.data.dao.CategoryDao;
 import co.edu.univalle.viaticos.data.dao.InvoiceDao;
 import co.edu.univalle.viaticos.data.dao.TravelCategoryDao;
+import co.edu.univalle.viaticos.data.dao.TravelDao;
 import co.edu.univalle.viaticos.data.entity.Category;
 import co.edu.univalle.viaticos.data.entity.Invoice;
 import co.edu.univalle.viaticos.data.entity.TravelCategory;
+import co.edu.univalle.viaticos.data.entity.Travel;
 
 public class NewInvoiceActivity extends AppCompatActivity {
 
@@ -50,8 +52,11 @@ public class NewInvoiceActivity extends AppCompatActivity {
     private InvoiceDao invoiceDao;
     private CategoryDao categoryDao;
     private TravelCategoryDao travelCategoryDao;
+    private TravelDao travelDao;
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
     private HashMap<String, Integer> categoryNameToIdMap = new HashMap<>();
+    private Date travelStartDate;
+    private Date travelEndDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +89,10 @@ public class NewInvoiceActivity extends AppCompatActivity {
         invoiceDao = db.invoiceDao();
         categoryDao = db.categoryDao();
         travelCategoryDao = db.travelCategoryDao();
+        travelDao = db.travelDao();
+
+        // Cargar fechas del viaje
+        loadTravelDates();
 
         // Configurar listener para el botón de guardar
         buttonGuardar.setOnClickListener(v -> saveInvoice());
@@ -127,29 +136,46 @@ public class NewInvoiceActivity extends AppCompatActivity {
         });
     }
 
+    private void loadTravelDates() {
+        executorService.execute(() -> {
+            Travel travel = travelDao.getTravelById(travelId);
+            if (travel != null) {
+                travelStartDate = travel.getStartDate();
+                travelEndDate = travel.getEndDate();
+            }
+        });
+    }
+
     private void setupDatePicker() {
-        DatePickerDialog.OnDateSetListener dateSetListener = (view, year, month, day) -> {
+        DatePickerDialog.OnDateSetListener dateSetListener = (view, year, month, dayOfMonth) -> {
             calendar.set(Calendar.YEAR, year);
             calendar.set(Calendar.MONTH, month);
-            calendar.set(Calendar.DAY_OF_MONTH, day);
-            updateLabel();
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateDateLabel();
         };
 
-        fechaInput.setOnClickListener(v -> showDatePicker(dateSetListener));
-        fechaLayout.setEndIconOnClickListener(v -> showDatePicker(dateSetListener));
+        fechaInput.setOnClickListener(v -> {
+            if (travelStartDate != null && travelEndDate != null) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    NewInvoiceActivity.this,
+                    dateSetListener,
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH)
+                );
+
+                // Establecer límites de fecha
+                datePickerDialog.getDatePicker().setMinDate(travelStartDate.getTime());
+                datePickerDialog.getDatePicker().setMaxDate(travelEndDate.getTime());
+
+                datePickerDialog.show();
+            } else {
+                Toast.makeText(this, "Error al cargar las fechas del viaje", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    private void showDatePicker(DatePickerDialog.OnDateSetListener dateSetListener) {
-        new DatePickerDialog(
-                NewInvoiceActivity.this,
-                dateSetListener,
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-        ).show();
-    }
-
-    private void updateLabel() {
+    private void updateDateLabel() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
         fechaInput.setText(dateFormat.format(calendar.getTime()));
     }
@@ -186,6 +212,12 @@ public class NewInvoiceActivity extends AppCompatActivity {
             return;
         }
 
+        // Validar que la fecha esté dentro del rango del viaje
+        if (date.before(travelStartDate) || date.after(travelEndDate)) {
+            Toast.makeText(this, "La fecha debe estar dentro del rango del viaje", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Integer categoryId = categoryNameToIdMap.get(categoryName);
         if (categoryId == null) {
             Toast.makeText(this, "Categoría seleccionada inválida", Toast.LENGTH_SHORT).show();
@@ -197,19 +229,15 @@ public class NewInvoiceActivity extends AppCompatActivity {
         final int finalCategoryId = categoryId;
 
         executorService.execute(() -> {
-            Invoice newInvoice = new Invoice(
-                    travelId,
-                    finalDate,
-                    finalAmount,
-                    description,
-                    finalCategoryId
-            );
-
-            invoiceDao.insertInvoice(newInvoice);
+            Invoice invoice = new Invoice(travelId, finalDate, finalAmount, description, finalCategoryId);
+            invoiceDao.insertInvoice(invoice);
 
             runOnUiThread(() -> {
-                Toast.makeText(NewInvoiceActivity.this, "Factura guardada con éxito", Toast.LENGTH_SHORT).show();
-                finish(); // Regresar a la actividad anterior (DetailsActivity)
+                Toast.makeText(NewInvoiceActivity.this, "Gasto guardado exitosamente", Toast.LENGTH_SHORT).show();
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("INVOICE_ADDED", true);
+                setResult(RESULT_OK, resultIntent);
+                finish();
             });
         });
     }

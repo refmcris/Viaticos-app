@@ -6,6 +6,7 @@
     <string-array name="tipos_gastos">
         <item>Alojamiento</item>
         <item>Alimentación</item>
+        <item>Alimentación bebidas</item>
         <item>Transporte entre terminales</item>
         <item>Prima por aeropuerto</item>
     </string-array>

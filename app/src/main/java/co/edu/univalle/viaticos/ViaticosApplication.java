@@ -1,26 +1,27 @@
 package co.edu.univalle.viaticos;
 
 import android.app.Application;
-import co.edu.univalle.viaticos.data.DatabaseInitializer;
+import co.edu.univalle.viaticos.data.AppDatabase;
 
 public class ViaticosApplication extends Application {
+
+    private static ViaticosApplication instance;
+    private AppDatabase database;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        
-        // Inicializar la base de datos
-        DatabaseInitializer initializer = new DatabaseInitializer(this);
-        initializer.initializeDatabase(new DatabaseInitializer.InitializationCallback() {
-            @Override
-            public void onSuccess() {
-                // Base de datos inicializada correctamente
-            }
+        instance = this;
 
-            @Override
-            public void onError(Exception e) {
-                // Manejar el error de inicialización
-                e.printStackTrace();
-            }
-        });
+        // Inicializar la base de datos
+        database = AppDatabase.getDatabase(this);
     }
-} 
+
+    public static ViaticosApplication getInstance() {
+        return instance;
+    }
+
+    public AppDatabase getDatabase() {
+        return database;
+    }
+}

@@ -24,4 +24,7 @@ public interface UserDao {
 
     @Delete
     void deleteUser(User user);
+
+    @Query("SELECT * FROM users")
+    List<User> getAllUsersSync();
 } 

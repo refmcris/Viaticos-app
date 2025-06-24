@@ -18,6 +18,8 @@ import co.edu.univalle.viaticos.data.AppDatabase;
 import co.edu.univalle.viaticos.data.dao.UserDao;
 import co.edu.univalle.viaticos.data.entity.User;
 
+import java.util.List;
+
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private EditText emailEditText;
@@ -56,7 +58,16 @@ public class LoginActivity extends AppCompatActivity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
+                        // Log de todos los usuarios en la base de datos
+                        List<User> allUsers = userDao.getAllUsersSync();
+                        for (User u : allUsers) {
+                            Log.d("LoginDebug", "Usuario en BD: " + u.getEmail() + " / " + u.getPassword());
+                        }
+                        Log.d("Login", "Email ingresado: " + email);
                         User user = userDao.getUserByEmail(email);
+                        if (user != null) {
+                            Log.d("Login", "Usuario encontrado: " + user.getEmail() + ", password: " + user.getPassword());
+                        }
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

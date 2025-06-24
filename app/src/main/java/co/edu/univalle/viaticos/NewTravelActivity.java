@@ -232,9 +232,9 @@ public class NewTravelActivity extends AppCompatActivity {
                     destino,
                     startDate,
                     endDate,
-                    totalBudget,
-                    false,  // isCompleted
-                    0.0     // completionDate - valor por defecto
+                    0.0,         // totalSpent (lo gastado al crear el viaje es 0)
+                    false,       // status
+                    totalBudget  // travelBudget (el límite calculado)
                 );
 
                 long travelId = travelDao.insertTravel(travel);

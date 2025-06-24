@@ -37,9 +37,10 @@ public abstract class AppDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(
                         context.getApplicationContext(),
                         AppDatabase.class,
-                        "viaticos_database"
+                        "viaticos_database.db"
                     )
-                    .fallbackToDestructiveMigration()
+                    .createFromAsset("viaticos_database.db")
+                    //.fallbackToDestructiveMigration()
                     .build();
                 }
             }

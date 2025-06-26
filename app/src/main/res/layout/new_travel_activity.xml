@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewTravelActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#2979FF"
+        android:paddingStart="0dp"
+        android:paddingEnd="@dimen/margin_horizontal"
+        app:contentInsetStartWithNavigation="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:layout_marginStart="-10dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Botón de retroceso"
+                android:padding="12dp"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_horizontal"
+                android:text="Nuevo viaje"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size_title" />
+
+        </LinearLayout>
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/topAppBar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_vertical">
+
+
+            <TextView
+                android:id="@+id/destinoTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_horizontal"
+                android:layout_marginTop="8dp"
+                android:text="Destino"
+                android:textColor="@android:color/black"
+
+                android:textSize="@dimen/text_size_subtitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/destinoLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_horizontal"
+                android:layout_marginTop="8dp"
+                app:endIconMode="clear_text"
+                app:layout_constraintTop_toBottomOf="@id/destinoTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/destinoInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_height"
+                    android:hint="Ciudad"
+                    android:textSize="@dimen/text_size_body"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/fechaInicioTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha inicio"
+                android:textColor="@android:color/black"
+                android:layout_marginStart="@dimen/margin_horizontal"
+                android:layout_marginTop="@dimen/margin_vertical"
+                android:textSize="@dimen/text_size_subtitle"
+                app:layout_constraintTop_toBottomOf="@id/destinoLayout"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fechaInicioLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_horizontal"
+                android:layout_marginTop="8dp"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_calendar"
+                app:layout_constraintTop_toBottomOf="@id/fechaInicioTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fechaInicioInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_height"
+                    android:hint="DD.MM.YYYY"
+                    android:textSize="@dimen/text_size_body"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:cursorVisible="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/fechaFinTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha fin"
+                android:textColor="@android:color/black"
+                android:layout_marginStart="@dimen/margin_horizontal"
+                android:layout_marginTop="@dimen/margin_vertical"
+                android:textSize="@dimen/text_size_subtitle"
+                app:layout_constraintTop_toBottomOf="@id/fechaInicioLayout"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fechaFinLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_horizontal"
+                android:layout_marginTop="8dp"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_calendar"
+                app:layout_constraintTop_toBottomOf="@id/fechaFinTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fechaFinInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_height"
+                    android:hint="DD.MM.YYYY"
+                    android:textSize="@dimen/text_size_body"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:cursorVisible="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/categoriesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Categorías"
+                android:textColor="@android:color/black"
+                android:layout_marginStart="@dimen/margin_horizontal"
+                android:layout_marginTop="@dimen/margin_vertical"
+                android:textSize="@dimen/text_size_subtitle"
+                app:layout_constraintTop_toBottomOf="@id/fechaFinLayout"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupCategories"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_horizontal"
+                android:layout_marginTop="8dp"
+                app:chipSpacingHorizontal="8dp"
+                app:chipSpacingVertical="8dp"
+                app:selectionRequired="false"
+                app:singleSelection="false"
+                app:layout_constraintTop_toBottomOf="@id/categoriesTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipAlojamiento"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alojamiento" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipViajes"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Viajes" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipComidas"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Comidas" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipOtros"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Otros" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <Button
+                android:id="@+id/buttonCrear"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/input_height"
+                android:backgroundTint="#2979FF"
+                android:minWidth="@dimen/button_min_width"
+                android:padding="12dp"
+                android:text="Crear"
+                android:textColor="#fff"
+                android:textSize="@dimen/text_size_body"
+                android:layout_marginTop="@dimen/margin_vertical"
+                app:layout_constraintTop_toBottomOf="@id/chipGroupCategories"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

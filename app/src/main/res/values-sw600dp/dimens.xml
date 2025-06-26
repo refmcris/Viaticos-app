@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dimensiones para tablets -->
+    <dimen name="margin_horizontal">32dp</dimen>
+    <dimen name="margin_vertical">24dp</dimen>
+    <dimen name="text_size_title">30sp</dimen>
+    <dimen name="text_size_subtitle">22sp</dimen>
+    <dimen name="text_size_body">18sp</dimen>
+    <dimen name="icon_size">64dp</dimen>
+    <dimen name="avatar_size">200dp</dimen>
+    <dimen name="button_min_width">400dp</dimen>
+    <dimen name="card_padding">24dp</dimen>
+    <dimen name="input_height">64dp</dimen>
+</resources> 

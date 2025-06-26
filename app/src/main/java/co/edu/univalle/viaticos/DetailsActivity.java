@@ -61,7 +61,7 @@ public class DetailsActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.details_activity);
 
-        // Inicializar vistas
+
         cityName = findViewById(R.id.cityName);
         dateRange = findViewById(R.id.dateRange);
         limiteValue = findViewById(R.id.limiteValue);
@@ -73,10 +73,8 @@ public class DetailsActivity extends AppCompatActivity {
         fab = findViewById(R.id.fab);
         buttonHistorial = findViewById(R.id.buttonHistorial);
 
-        // Obtener el ID del viaje del intent
         travelId = getIntent().getIntExtra("TRAVEL_ID", -1);
 
-        // Inicializar la base de datos y DAOs
         AppDatabase db = AppDatabase.getDatabase(this);
         travelDao = db.travelDao();
         userDao = db.userDao();
@@ -84,13 +82,10 @@ public class DetailsActivity extends AppCompatActivity {
         categoryDao = db.categoryDao();
         travelCategoryDao = db.travelCategoryDao();
 
-        // Cargar datos del viaje
         loadTravelDetails();
 
-        // Configurar listener para el botón de retroceso
         backButton.setOnClickListener(v -> finish());
 
-        // Configurar listener para el FloatingActionButton (agregar gasto)
         fab.setOnClickListener(v -> {
             if (travel != null && !travel.isCompleted()) {
                 Intent intent = new Intent(DetailsActivity.this, NewInvoiceActivity.class);
@@ -101,7 +96,6 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 
-        // Configurar listener para el botón "Ver historial de gastos"
         buttonHistorial.setOnClickListener(v -> {
             Intent intent = new Intent(DetailsActivity.this, RecordActivity.class);
             intent.putExtra("TRAVEL_ID", travelId);
@@ -177,7 +171,7 @@ public class DetailsActivity extends AppCompatActivity {
                     gastosValue.setText(String.format(Locale.getDefault(), "$%,.2f", totalExpenses));
                     totalValue.setText(String.format(Locale.getDefault(), "$%,.2f", totalExpenses));
 
-                    // Mostrar categorías y porcentajes
+                    
                     categoriesContainer.removeAllViews();
                     if (!categoryTexts.isEmpty()) {
                         categoriesHeader.setVisibility(View.VISIBLE);
@@ -191,13 +185,11 @@ public class DetailsActivity extends AppCompatActivity {
                         categoriesHeader.setVisibility(View.GONE);
                     }
 
-                    // Actualizar visibilidad de botones según estado
                     Button buttonFinalizar = findViewById(R.id.buttonFinalizar);
                     if (buttonFinalizar != null) {
                         buttonFinalizar.setVisibility(travel.isCompleted() ? View.GONE : View.VISIBLE);
                     }
 
-                    // Actualizar estado del viaje
                     TextView estadoText = findViewById(R.id.estadoText);
                     if (estadoText != null) {
                         estadoText.setText(travel.isCompleted() ? "Viaje finalizado" : "Viaje en curso");
@@ -252,7 +244,6 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 
-        // Agregar botón para finalizar viaje
         Button buttonFinalizar = findViewById(R.id.buttonFinalizar);
         if (buttonFinalizar != null) {
             buttonFinalizar.setVisibility(travel != null && !travel.isCompleted() ? View.VISIBLE : View.GONE);
@@ -275,18 +266,15 @@ public class DetailsActivity extends AppCompatActivity {
 
     private void finalizarViaje() {
         executorService.execute(() -> {
-            // Obtener el total gastado
             List<Invoice> invoices = invoiceDao.getInvoicesByTravelId(travelId);
             final double[] totalGastado = {0.0};
             for (Invoice invoice : invoices) {
                 totalGastado[0] += invoice.getAmount();
             }
 
-            // Actualizar el viaje
             travel.setCompleted(true);
             travelDao.updateTravel(travel);
 
-            // Mostrar resumen
             runOnUiThread(() -> showResumenDialog(totalGastado[0]));
         });
     }
@@ -302,19 +290,16 @@ public class DetailsActivity extends AppCompatActivity {
         TextView estadoValue = view.findViewById(R.id.estadoValue);
         Button buttonAceptar = view.findViewById(R.id.buttonAceptar);
 
-        // Formatear valores monetarios
         NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
         String limiteStr = formatter.format(travel.getTravelBudget());
         String gastosStr = formatter.format(totalGastado);
         double diferencia = travel.getTravelBudget() - totalGastado;
         String diferenciaStr = formatter.format(diferencia);
 
-        // Establecer valores
         limiteValue.setText(limiteStr);
         gastosValue.setText(gastosStr);
         diferenciaValue.setText(diferenciaStr);
         
-        // Determinar estado
         if (diferencia >= 0) {
             estadoValue.setText("Dentro del presupuesto");
             estadoValue.setTextColor(getResources().getColor(android.R.color.holo_green_dark));

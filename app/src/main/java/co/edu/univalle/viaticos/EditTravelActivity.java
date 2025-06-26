@@ -57,7 +57,6 @@ public class EditTravelActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Obtener el ID del viaje del intent
         travelId = getIntent().getIntExtra("TRAVEL_ID", -1);
         if (travelId == -1) {
             Toast.makeText(this, "Error: ID de viaje no identificado", Toast.LENGTH_SHORT).show();
@@ -65,23 +64,20 @@ public class EditTravelActivity extends AppCompatActivity {
             return;
         }
 
-        // Inicializar vistas
         chipGroupCategories = findViewById(R.id.chipGroupCategories);
         buttonGuardar = findViewById(R.id.buttonGuardar);
         backButton = findViewById(R.id.backButton);
 
-        // Inicializar la base de datos y DAOs
         AppDatabase db = AppDatabase.getDatabase(this);
         travelDao = db.travelDao();
         userDao = db.userDao();
         categoryDao = db.categoryDao();
         travelCategoryDao = db.travelCategoryDao();
 
-        // Configurar listeners
         backButton.setOnClickListener(v -> finish());
         buttonGuardar.setOnClickListener(v -> updateTravel());
 
-        // Cargar datos del viaje
+
         loadTravelData();
     }
 
@@ -93,13 +89,12 @@ public class EditTravelActivity extends AppCompatActivity {
                 User user = userDao.getUserById(userId);
                 List<TravelCategory> travelCategories = travelCategoryDao.getTravelCategoriesByTravelId(travelId);
                 
-                // Guardar las categorías seleccionadas
+
                 for (TravelCategory tc : travelCategories) {
                     selectedCategoryPercentages.put(tc.getCategoryId(), tc.getPercentage());
                 }
 
                 runOnUiThread(() -> {
-                    // Cargar categorías
                     loadCategoriesIntoChips();
                 });
             }
@@ -111,7 +106,7 @@ public class EditTravelActivity extends AppCompatActivity {
             List<Category> categories = categoryDao.getAllCategoriesSync();
             User user = userDao.getUserById(userId);
             runOnUiThread(() -> {
-                // Limpiar cualquier chip existente
+                
                 chipGroupCategories.removeAllViews();
                 
                 for (Category category : categories) {
@@ -120,14 +115,14 @@ public class EditTravelActivity extends AppCompatActivity {
                     chip.setCheckable(true);
                     chip.setTag(category.getCategoryId());
                     
-                    // Marcar como seleccionado si ya estaba seleccionado
+                    
                     if (selectedCategoryPercentages.containsKey(category.getCategoryId())) {
                         chip.setChecked(true);
                     }
                     
                     chipGroupCategories.addView(chip);
 
-                    // Add a listener to handle chip checked changes
+                    
                     chip.setOnCheckedChangeListener((buttonView, isChecked) -> {
                         int categoryId = (int) buttonView.getTag();
                         
@@ -157,23 +152,23 @@ public class EditTravelActivity extends AppCompatActivity {
                 return;
             }
 
-            // Calcular el límite total basado en el salario y los porcentajes seleccionados
+           
             double totalPercentage = 0.0;
             for (Double percentage : selectedCategoryPercentages.values()) {
                 totalPercentage += percentage;
             }
             double travelBudget = user.getSalary() * (totalPercentage / 100.0);
 
-            // Actualizar el viaje
+           
             Travel travel = travelDao.getTravelById(travelId);
             if (travel != null) {
                 travel.setTravelBudget(travelBudget);
                 travelDao.updateTravel(travel);
 
-                // Eliminar las categorías anteriores
+                
                 travelCategoryDao.deleteAllCategoriesForTravel(travelId);
 
-                // Crear las nuevas relaciones con las categorías seleccionadas
+                
                 for (HashMap.Entry<Integer, Double> entry : selectedCategoryPercentages.entrySet()) {
                     TravelCategory travelCategory = new TravelCategory(
                         travelId, 

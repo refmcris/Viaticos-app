@@ -70,7 +70,7 @@ public class NewInvoiceActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Obtener el ID del viaje del intent
+      
         travelId = getIntent().getIntExtra("TRAVEL_ID", -1);
         if (travelId == -1) {
             Toast.makeText(this, "Error: ID de viaje no identificado", Toast.LENGTH_SHORT).show();
@@ -78,23 +78,21 @@ public class NewInvoiceActivity extends AppCompatActivity {
             return;
         }
 
-        // Inicializar vistas y calendario
+       
         initializeViews();
         setupDatePicker();
         setupBackButton();
         setupCategorySpinner();
 
-        // Inicializar la base de datos y DAOs
+       
         AppDatabase db = AppDatabase.getDatabase(this);
         invoiceDao = db.invoiceDao();
         categoryDao = db.categoryDao();
         travelCategoryDao = db.travelCategoryDao();
         travelDao = db.travelDao();
 
-        // Cargar fechas del viaje
         loadTravelDates();
 
-        // Configurar listener para el botón de guardar
         buttonGuardar.setOnClickListener(v -> saveInvoice());
     }
 
@@ -130,7 +128,7 @@ public class NewInvoiceActivity extends AppCompatActivity {
                 );
                 tipoGastoInput.setAdapter(adapter);
 
-                // Hacer que el campo no sea editable manualmente
+                
                 tipoGastoInput.setKeyListener(null);
             });
         });
@@ -164,7 +162,7 @@ public class NewInvoiceActivity extends AppCompatActivity {
                     calendar.get(Calendar.DAY_OF_MONTH)
                 );
 
-                // Establecer límites de fecha
+                
                 datePickerDialog.getDatePicker().setMinDate(travelStartDate.getTime());
                 datePickerDialog.getDatePicker().setMaxDate(travelEndDate.getTime());
 
@@ -212,7 +210,7 @@ public class NewInvoiceActivity extends AppCompatActivity {
             return;
         }
 
-        // Validar que la fecha esté dentro del rango del viaje
+        
         if (date.before(travelStartDate) || date.after(travelEndDate)) {
             Toast.makeText(this, "La fecha debe estar dentro del rango del viaje", Toast.LENGTH_SHORT).show();
             return;

@@ -42,7 +42,6 @@ public class TravelActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Obtener el ID del usuario del intent
         userId = getIntent().getIntExtra("USER_ID", -1);
         if (userId == -1) {
             Log.e("TravelActivity", "Error: Usuario no identificado");
@@ -50,11 +49,9 @@ public class TravelActivity extends AppCompatActivity {
             return;
         }
 
-        // Inicializar la base de datos y DAOs
         AppDatabase db = AppDatabase.getDatabase(this);
         travelDao = db.travelDao();
 
-        // Configurar RecyclerView
         recyclerViajes = findViewById(R.id.recyclerViajes);
         recyclerViajes.setLayoutManager(new LinearLayoutManager(this));
         travelAdapter = new TravelAdapter(new ArrayList<>(), travel -> {
@@ -64,7 +61,6 @@ public class TravelActivity extends AppCompatActivity {
         });
         recyclerViajes.setAdapter(travelAdapter);
 
-        // Configurar FAB
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
             Intent intent = new Intent(TravelActivity.this, NewTravelActivity.class);
@@ -72,11 +68,14 @@ public class TravelActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Configurar botón de salida
         ImageButton exitButton = findViewById(R.id.exitButton);
-        exitButton.setOnClickListener(v -> finish());
+        exitButton.setOnClickListener(v -> {
+            Intent intent = new Intent(TravelActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        });
 
-        // Cargar viajes
         loadTravels();
     }
 
@@ -95,7 +94,7 @@ public class TravelActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        loadTravels(); // Recargar viajes cuando la actividad se reanuda
+        loadTravels(); 
     }
 
     @Override

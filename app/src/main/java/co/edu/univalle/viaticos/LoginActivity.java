@@ -33,16 +33,13 @@ public class LoginActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.login_main);
 
-        // Inicializar la base de datos
         AppDatabase db = AppDatabase.getDatabase(this);
         userDao = db.userDao();
 
-        // Inicializar vistas
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.buttonSignIn);
 
-        // Configurar el listener del botón de login
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,11 +51,9 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                // Realizar la autenticación en un hilo separado
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        // Log de todos los usuarios en la base de datos
                         List<User> allUsers = userDao.getAllUsersSync();
                         for (User u : allUsers) {
                             Log.d("LoginDebug", "Usuario en BD: " + u.getEmail() + " / " + u.getPassword());

@@ -66,14 +66,12 @@ public class NewTravelActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.new_travel_activity);
         
-        // Configurar el sistema de insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // Obtener el ID del usuario del intent
         userId = getIntent().getIntExtra("USER_ID", -1);
         if (userId == -1) {
             Toast.makeText(this, "Error: Usuario no identificado", Toast.LENGTH_SHORT).show();
@@ -81,7 +79,6 @@ public class NewTravelActivity extends AppCompatActivity {
             return;
         }
 
-        // Inicializar vistas
         destinoInput = findViewById(R.id.destinoInput);
         fechaInicioInput = findViewById(R.id.fechaInicioInput);
         fechaFinInput = findViewById(R.id.fechaFinInput);
@@ -90,7 +87,6 @@ public class NewTravelActivity extends AppCompatActivity {
         backButton = findViewById(R.id.backButton);
         calendar = Calendar.getInstance();
 
-        // Inicializar la base de datos y DAOs
         AppDatabase db = AppDatabase.getDatabase(this);
         travelDao = db.travelDao();
         userDao = db.userDao();
@@ -112,7 +108,6 @@ public class NewTravelActivity extends AppCompatActivity {
             List<Category> categories = categoryDao.getAllCategoriesSync();
             User user = userDao.getUserById(userId);
             runOnUiThread(() -> {
-                // Limpiar cualquier chip existente
                 chipGroupCategories.removeAllViews();
                 
                 for (Category category : categories) {
@@ -122,7 +117,6 @@ public class NewTravelActivity extends AppCompatActivity {
                     chip.setTag(category.getCategoryId());
                     chipGroupCategories.addView(chip);
 
-                    // Add a listener to handle chip checked changes
                     chip.setOnCheckedChangeListener((buttonView, isChecked) -> {
                         int categoryId = (int) buttonView.getTag();
                         
@@ -153,16 +147,15 @@ public class NewTravelActivity extends AppCompatActivity {
             calendar.get(Calendar.DAY_OF_MONTH)
         );
 
-        // Si es la fecha de fin, establecer la fecha mínima como la fecha de inicio
         if (!isStartDate && fechaInicioInput.getText() != null && !fechaInicioInput.getText().toString().isEmpty()) {
             try {
                 String[] fechaInicioParts = fechaInicioInput.getText().toString().split("\\.");
                 if (fechaInicioParts.length == 3) {
                     Calendar minCalendar = Calendar.getInstance();
                     minCalendar.set(
-                        Integer.parseInt(fechaInicioParts[2]), // año
-                        Integer.parseInt(fechaInicioParts[1]) - 1, // mes (0-11)
-                        Integer.parseInt(fechaInicioParts[0]) // día
+                        Integer.parseInt(fechaInicioParts[2]), 
+                        Integer.parseInt(fechaInicioParts[1]) - 1, 
+                        Integer.parseInt(fechaInicioParts[0]) 
                     );
                     datePickerDialog.getDatePicker().setMinDate(minCalendar.getTimeInMillis());
                 }
@@ -191,7 +184,6 @@ public class NewTravelActivity extends AppCompatActivity {
 
         executorService.execute(() -> {
             try {
-                // Obtener el usuario actual
                 User currentUser = userDao.getUserById(userId);
                 if (currentUser == null) {
                     runOnUiThread(() -> Toast.makeText(NewTravelActivity.this, 
@@ -199,7 +191,6 @@ public class NewTravelActivity extends AppCompatActivity {
                     return;
                 }
 
-                // Convertir fechas
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
                 Date startDate = dateFormat.parse(fechaInicio);
                 Date endDate = dateFormat.parse(fechaFin);
@@ -210,7 +201,6 @@ public class NewTravelActivity extends AppCompatActivity {
                     return;
                 }
 
-                // Validar fechas superpuestas
                 List<Travel> overlappingTravels = travelDao.getOverlappingTravels(
                     currentUser.getEmployeeId(), startDate, endDate);
                 
@@ -220,13 +210,11 @@ public class NewTravelActivity extends AppCompatActivity {
                     return;
                 }
 
-                // Calcular el presupuesto total
                 double totalBudget = 0;
                 for (Double percentage : selectedCategoryPercentages.values()) {
                     totalBudget += currentUser.getSalary() * (percentage / 100.0);
                 }
 
-                // Crear el viaje
                 Travel travel = new Travel(
                     currentUser.getEmployeeId(),
                     destino,
@@ -239,7 +227,6 @@ public class NewTravelActivity extends AppCompatActivity {
 
                 long travelId = travelDao.insertTravel(travel);
 
-                // Insertar las categorías seleccionadas
                 for (HashMap.Entry<Integer, Double> entry : selectedCategoryPercentages.entrySet()) {
                     TravelCategory travelCategory = new TravelCategory(
                         (int) travelId, 

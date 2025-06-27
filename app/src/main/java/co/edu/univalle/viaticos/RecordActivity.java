@@ -122,7 +122,7 @@ public class RecordActivity extends AppCompatActivity {
             if (categoryName.equals("Todas las categorías")) {
                 filteredInvoices.addAll(allInvoices);
             } else {
-                /
+                
                 Category selectedCategory = categoryDao.getCategoryByName(categoryName);
                 if (selectedCategory != null) {
                     

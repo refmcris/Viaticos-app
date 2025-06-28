@@ -14,6 +14,7 @@
         android:layout_height="@dimen/avatar_size"
         android:layout_marginBottom="@dimen/margin_vertical"
         android:elevation="4dp"
+        style="@style/Widget.Viaticos.ImageView"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,9 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¡Bienvenido!"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/text_size_title"
-        android:textStyle="bold"
+        style="@style/TextAppearance.Viaticos.Headline1"
         android:layout_marginBottom="@dimen/margin_vertical"
         app:layout_constraintBottom_toTopOf="@+id/logoImageView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,9 +36,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_horizontal"
-        android:backgroundTint="@android:color/white"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="8dp"
+        style="@style/Widget.Viaticos.CardView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,17 +54,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Iniciar Sesión"
-                android:textColor="#2979FF"
+                style="@style/Widget.Viaticos.TextView.Accent"
                 android:textSize="@dimen/text_size_subtitle"
                 android:textStyle="bold"
                 android:layout_marginBottom="@dimen/margin_vertical"/>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.Viaticos.TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_vertical"
-                app:startIconTint="#2979FF">
+                android:layout_marginBottom="@dimen/margin_vertical">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/emailEditText"
@@ -80,12 +76,11 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.Viaticos.TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_vertical"
-                app:passwordToggleEnabled="true"
-                app:startIconTint="#2979FF">
+                app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/passwordEditText"
@@ -101,12 +96,10 @@
                 android:id="@+id/buttonSignIn"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/input_height"
-                android:backgroundTint="#2979FF"
                 android:padding="12dp"
                 android:text="INICIAR SESIÓN"
-                android:textColor="#fff"
                 android:textSize="@dimen/text_size_body"
-                app:cornerRadius="10dp"
+                style="@style/Widget.Viaticos.Button"
                 android:textStyle="bold"/>
 
         </LinearLayout>

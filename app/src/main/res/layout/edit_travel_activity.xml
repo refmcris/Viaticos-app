@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    style="@style/Widget.Viaticos.ConstraintLayout">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="#2979FF"
         android:paddingStart="0dp"
         android:paddingEnd="@dimen/margin_horizontal"
+        style="@style/Widget.Viaticos.Toolbar"
         app:contentInsetStartWithNavigation="0dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,8 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_horizontal"
                 android:text="Editar categorías"
-                android:textColor="@android:color/white"
-                android:textSize="20sp" />
+                style="@style/TextAppearance.Viaticos.Headline2" />
 
         </LinearLayout>
 
@@ -52,7 +52,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:text="Seleccione las categorías:"
-        android:textColor="@android:color/black"
+        style="@style/Widget.Viaticos.TextView.Primary"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,10 +77,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="#2979FF"
         android:padding="12dp"
         android:text="Guardar cambios"
-        android:textColor="#fff"
+        style="@style/Widget.Viaticos.Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

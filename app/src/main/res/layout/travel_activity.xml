@@ -5,16 +5,16 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/Widget.Viaticos.ConstraintLayout"
     tools:context=".TravelActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="#2979FF"
         android:paddingStart="0dp"
         android:paddingEnd="16dp"
-        android:elevation="4dp"
+        style="@style/Widget.Viaticos.Toolbar"
         app:contentInsetStartWithNavigation="0dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,8 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Mis viajes"
-                android:textColor="@android:color/white"
-                android:textSize="25sp"
+                style="@style/TextAppearance.Viaticos.Headline2"
                 android:layout_marginStart="16dp"/>
 
             <ImageButton
@@ -67,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Lista de viajes realizados"
-        android:textColor="@color/black"
+        style="@style/Widget.Viaticos.TextView.Primary"
         android:textSize="18sp"
         android:layout_marginTop="24dp"
         app:layout_constraintTop_toBottomOf="@id/topAppBar"
@@ -80,6 +79,7 @@
         android:layout_marginTop="16dp"
         android:clipToPadding="false"
         android:paddingBottom="80dp"
+        style="@style/Widget.Viaticos.RecyclerView"
         app:layout_constraintTop_toBottomOf="@id/textView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/startGuideline"
@@ -92,9 +92,8 @@
         android:contentDescription="Agregar viaje"
         android:src="@drawable/ic_add"
         android:layout_margin="16dp"
+        style="@style/Widget.Viaticos.FloatingActionButton"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/endGuideline"
-        app:tint="@android:color/white"
-        app:backgroundTint="@color/blue" />
+        app:layout_constraintEnd_toEndOf="@id/endGuideline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

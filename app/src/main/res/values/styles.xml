@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Estilos de texto -->
+    <style name="TextAppearance.Viaticos.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Viaticos.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Viaticos.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Viaticos.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.Viaticos.Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/text_secondary_light</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextAppearance.Viaticos.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Estilos de botones -->
+    <style name="Widget.Viaticos.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/primary_blue</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <style name="Widget.Viaticos.Button.Secondary" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/primary_blue</item>
+        <item name="android:textColor">@color/primary_blue</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <!-- Estilos de campos de texto -->
+    <style name="Widget.Viaticos.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/primary_blue</item>
+        <item name="hintTextColor">@color/primary_blue</item>
+        <item name="startIconTint">@color/primary_blue</item>
+        <item name="endIconTint">@color/primary_blue</item>
+    </style>
+
+    <!-- Estilos de tarjetas -->
+    <style name="Widget.Viaticos.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/card_background_light</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">8dp</item>
+    </style>
+
+    <!-- Estilos de toolbar -->
+    <style name="Widget.Viaticos.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">@color/primary_blue</item>
+        <item name="android:elevation">4dp</item>
+        <item name="titleTextColor">@color/white</item>
+        <item name="subtitleTextColor">@color/white</item>
+    </style>
+
+    <!-- Estilos de FloatingActionButton -->
+    <style name="Widget.Viaticos.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/primary_blue</item>
+        <item name="tint">@color/white</item>
+    </style>
+
+    <!-- Estilos de RecyclerView -->
+    <style name="Widget.Viaticos.RecyclerView" parent="Widget.MaterialComponents.CardView">
+        <item name="android:background">@color/background_light</item>
+        <item name="android:clipToPadding">false</item>
+    </style>
+
+    <!-- Estilos de ImageView -->
+    <style name="Widget.Viaticos.ImageView" parent="Widget.MaterialComponents.CardView">
+        <item name="android:elevation">4dp</item>
+    </style>
+
+    <!-- Estilos de TextView con colores temáticos -->
+    <style name="Widget.Viaticos.TextView.Primary" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/text_primary_light</item>
+    </style>
+
+    <style name="Widget.Viaticos.TextView.Secondary" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/text_secondary_light</item>
+    </style>
+
+    <style name="Widget.Viaticos.TextView.Accent" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/primary_blue</item>
+    </style>
+
+    <!-- Estilos de LinearLayout -->
+    <style name="Widget.Viaticos.LinearLayout" parent="Widget.MaterialComponents.CardView">
+        <item name="android:background">@color/background_light</item>
+    </style>
+
+    <!-- Estilos de ConstraintLayout -->
+    <style name="Widget.Viaticos.ConstraintLayout" parent="Widget.MaterialComponents.CardView">
+        <item name="android:background">@color/background_light</item>
+    </style>
+</resources> 

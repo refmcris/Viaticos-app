@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Colores base -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="blue">#2979FF</color>
-
+    
+    <!-- Colores primarios -->
+    <color name="primary_blue">#2979FF</color>
+    <color name="primary_blue_dark">#1565C0</color>
+    <color name="primary_blue_light">#64B5F6</color>
+    
+    <!-- Colores secundarios -->
+    <color name="secondary_gray">#E0E0E0</color>
+    <color name="secondary_gray_dark">#424242</color>
+    <color name="secondary_gray_light">#F5F5F5</color>
+    
+    <!-- Colores de estado -->
+    <color name="success_green">#4CAF50</color>
+    <color name="warning_orange">#FF9800</color>
+    <color name="error_red">#F44336</color>
+    
+    <!-- Colores de texto -->
+    <color name="text_primary_light">#212121</color>
+    <color name="text_secondary_light">#757575</color>
+    <color name="text_primary_dark">#FFFFFF</color>
+    <color name="text_secondary_dark">#B3FFFFFF</color>
+    
+    <!-- Colores de fondo -->
+    <color name="background_light">#FFFFFF</color>
+    <color name="background_dark">#121212</color>
+    <color name="surface_light">#FFFFFF</color>
+    <color name="surface_dark">#1E1E1E</color>
+    
+    <!-- Colores de tarjetas -->
+    <color name="card_background_light">#FFFFFF</color>
+    <color name="card_background_dark">#2D2D2D</color>
+    
+    <!-- Colores de bordes -->
+    <color name="border_light">#E0E0E0</color>
+    <color name="border_dark">#424242</color>
 </resources>

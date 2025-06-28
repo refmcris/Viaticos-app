@@ -5,15 +5,16 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/Widget.Viaticos.ConstraintLayout"
     tools:context=".NewTravelActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="#2979FF"
         android:paddingStart="0dp"
         android:paddingEnd="@dimen/margin_horizontal"
+        style="@style/Widget.Viaticos.Toolbar"
         app:contentInsetStartWithNavigation="0dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,8 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_horizontal"
                 android:text="Nuevo viaje"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_title" />
+                style="@style/TextAppearance.Viaticos.Headline2" />
 
         </LinearLayout>
 
@@ -67,8 +67,7 @@
                 android:layout_marginStart="@dimen/margin_horizontal"
                 android:layout_marginTop="8dp"
                 android:text="Destino"
-                android:textColor="@android:color/black"
-
+                style="@style/Widget.Viaticos.TextView.Primary"
                 android:textSize="@dimen/text_size_subtitle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -79,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_horizontal"
                 android:layout_marginTop="8dp"
+                style="@style/Widget.Viaticos.TextInputLayout"
                 app:endIconMode="clear_text"
                 app:layout_constraintTop_toBottomOf="@id/destinoTitle"
                 app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fecha inicio"
-                android:textColor="@android:color/black"
+                style="@style/Widget.Viaticos.TextView.Primary"
                 android:layout_marginStart="@dimen/margin_horizontal"
                 android:layout_marginTop="@dimen/margin_vertical"
                 android:textSize="@dimen/text_size_subtitle"
@@ -111,6 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_horizontal"
                 android:layout_marginTop="8dp"
+                style="@style/Widget.Viaticos.TextInputLayout"
                 app:endIconMode="custom"
                 app:endIconDrawable="@drawable/ic_calendar"
                 app:layout_constraintTop_toBottomOf="@id/fechaInicioTitle"
@@ -134,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fecha fin"
-                android:textColor="@android:color/black"
+                style="@style/Widget.Viaticos.TextView.Primary"
                 android:layout_marginStart="@dimen/margin_horizontal"
                 android:layout_marginTop="@dimen/margin_vertical"
                 android:textSize="@dimen/text_size_subtitle"
@@ -147,6 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_horizontal"
                 android:layout_marginTop="8dp"
+                style="@style/Widget.Viaticos.TextInputLayout"
                 app:endIconMode="custom"
                 app:endIconDrawable="@drawable/ic_calendar"
                 app:layout_constraintTop_toBottomOf="@id/fechaFinTitle"
@@ -170,7 +172,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Categorías"
-                android:textColor="@android:color/black"
+                style="@style/Widget.Viaticos.TextView.Primary"
                 android:layout_marginStart="@dimen/margin_horizontal"
                 android:layout_marginTop="@dimen/margin_vertical"
                 android:textSize="@dimen/text_size_subtitle"
@@ -225,13 +227,12 @@
                 android:id="@+id/buttonCrear"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/input_height"
-                android:backgroundTint="#2979FF"
                 android:minWidth="@dimen/button_min_width"
                 android:padding="12dp"
                 android:text="Crear"
-                android:textColor="#fff"
                 android:textSize="@dimen/text_size_body"
                 android:layout_marginTop="@dimen/margin_vertical"
+                style="@style/Widget.Viaticos.Button"
                 app:layout_constraintTop_toBottomOf="@id/chipGroupCategories"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />

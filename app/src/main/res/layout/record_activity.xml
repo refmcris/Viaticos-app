@@ -5,15 +5,16 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/Widget.Viaticos.ConstraintLayout"
     tools:context=".RecordActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="#2979FF"
         android:paddingStart="0dp"
         android:paddingEnd="@dimen/margin_horizontal"
+        style="@style/Widget.Viaticos.Toolbar"
         app:contentInsetStartWithNavigation="0dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,8 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_horizontal"
                 android:text="Historial de gastos"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_title" />
+                style="@style/TextAppearance.Viaticos.Headline2" />
 
         </LinearLayout>
 
@@ -67,6 +67,7 @@
         android:layout_marginTop="@dimen/margin_vertical"
         android:clipToPadding="false"
         android:paddingBottom="@dimen/margin_vertical"
+        style="@style/Widget.Viaticos.RecyclerView"
         app:layout_constraintTop_toBottomOf="@id/spinnerCategoryFilter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

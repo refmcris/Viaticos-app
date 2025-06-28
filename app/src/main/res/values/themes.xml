@@ -1,8 +1,34 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Viaticos" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Colores primarios -->
+        <item name="colorPrimary">@color/primary_blue</item>
+        <item name="colorPrimaryVariant">@color/primary_blue_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        
+        <!-- Colores secundarios -->
+        <item name="colorSecondary">@color/primary_blue_light</item>
+        <item name="colorSecondaryVariant">@color/primary_blue</item>
+        <item name="colorOnSecondary">@color/white</item>
+        
+        <!-- Colores de fondo -->
+        <item name="android:colorBackground">@color/background_light</item>
+        <item name="colorSurface">@color/surface_light</item>
+        <item name="colorOnSurface">@color/text_primary_light</item>
+        
+        <!-- Colores de error -->
+        <item name="colorError">@color/error_red</item>
+        <item name="colorOnError">@color/white</item>
+        
+        <!-- Configuración de texto -->
+        <item name="android:textColorPrimary">@color/text_primary_light</item>
+        <item name="android:textColorSecondary">@color/text_secondary_light</item>
+        
+        <!-- Configuración de estado de ventana -->
+        <item name="android:statusBarColor">@color/primary_blue</item>
+        <item name="android:navigationBarColor">@color/background_light</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">true</item>
     </style>
 
     <style name="Theme.Viaticos" parent="Base.Theme.Viaticos" />

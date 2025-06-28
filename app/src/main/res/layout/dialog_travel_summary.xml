@@ -3,14 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    style="@style/Widget.Viaticos.LinearLayout">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Resumen del Viaje"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        style="@style/TextAppearance.Viaticos.Headline2"
         android:gravity="center"
         android:layout_marginBottom="16dp"/>
 
@@ -19,6 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Límite de gastos:"
+        style="@style/Widget.Viaticos.TextView.Primary"
         android:textStyle="bold"
         android:layout_marginBottom="4dp"/>
 
@@ -26,6 +27,7 @@
         android:id="@+id/limiteValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/Widget.Viaticos.TextView.Secondary"
         android:layout_marginBottom="16dp"/>
 
     <TextView
@@ -33,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Total gastado:"
+        style="@style/Widget.Viaticos.TextView.Primary"
         android:textStyle="bold"
         android:layout_marginBottom="4dp"/>
 
@@ -40,6 +43,7 @@
         android:id="@+id/gastosValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/Widget.Viaticos.TextView.Secondary"
         android:layout_marginBottom="16dp"/>
 
     <TextView
@@ -47,6 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Diferencia:"
+        style="@style/Widget.Viaticos.TextView.Primary"
         android:textStyle="bold"
         android:layout_marginBottom="4dp"/>
 
@@ -54,6 +59,7 @@
         android:id="@+id/diferenciaValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/Widget.Viaticos.TextView.Secondary"
         android:layout_marginBottom="16dp"/>
 
     <TextView
@@ -61,6 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Estado:"
+        style="@style/Widget.Viaticos.TextView.Primary"
         android:textStyle="bold"
         android:layout_marginBottom="4dp"/>
 
@@ -68,6 +75,7 @@
         android:id="@+id/estadoValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/Widget.Viaticos.TextView.Secondary"
         android:layout_marginBottom="16dp"/>
 
     <Button
@@ -75,6 +83,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Aceptar"
-        android:backgroundTint="#2979FF"/>
+        style="@style/Widget.Viaticos.Button"/>
 
 </LinearLayout> 

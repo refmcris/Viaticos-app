@@ -5,16 +5,16 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/Widget.Viaticos.ConstraintLayout"
     tools:context=".NewInvoiceActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="#2979FF"
         android:paddingStart="0dp"
         android:paddingEnd="@dimen/margin_horizontal"
-        android:elevation="4dp"
+        style="@style/Widget.Viaticos.Toolbar"
         app:contentInsetStartWithNavigation="0dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,8 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_horizontal"
                 android:text="Nueva factura"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_title" />
+                style="@style/TextAppearance.Viaticos.Headline2" />
 
         </LinearLayout>
 
@@ -81,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Nombre del gasto"
-                android:textColor="@android:color/black"
+                style="@style/Widget.Viaticos.TextView.Primary"
                 android:textSize="@dimen/text_size_subtitle"
                 app:layout_constraintStart_toStartOf="@id/nombreGastoLayout"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -92,6 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginHorizontal="@dimen/margin_horizontal"
+                style="@style/Widget.Viaticos.TextInputLayout"
                 app:endIconMode="clear_text"
                 app:layout_constraintTop_toBottomOf="@id/nombreGastoTitle"
                 app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cantidad"
-                android:textColor="@android:color/black"
+                style="@style/Widget.Viaticos.TextView.Primary"
                 android:textSize="@dimen/text_size_subtitle"
                 android:layout_marginTop="@dimen/margin_vertical"
                 app:layout_constraintTop_toBottomOf="@id/nombreGastoLayout"
@@ -123,6 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginHorizontal="@dimen/margin_horizontal"
+                style="@style/Widget.Viaticos.TextInputLayout"
                 app:endIconMode="clear_text"
                 app:layout_constraintTop_toBottomOf="@id/cantidadTitle"
                 app:layout_constraintStart_toStartOf="parent"
@@ -142,7 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tipo de gasto"
-                android:textColor="@android:color/black"
+                style="@style/Widget.Viaticos.TextView.Primary"
                 android:textSize="@dimen/text_size_subtitle"
                 android:layout_marginTop="@dimen/margin_vertical"
                 app:layout_constraintTop_toBottomOf="@id/cantidadLayout"
@@ -176,7 +177,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fecha"
-                android:textColor="@android:color/black"
+                style="@style/Widget.Viaticos.TextView.Primary"
                 android:textSize="@dimen/text_size_subtitle"
                 android:layout_marginTop="@dimen/margin_vertical"
                 app:layout_constraintTop_toBottomOf="@id/tipoGastoLayout"
@@ -188,6 +189,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginHorizontal="@dimen/margin_horizontal"
+                style="@style/Widget.Viaticos.TextInputLayout"
                 app:endIconMode="custom"
                 app:endIconDrawable="@drawable/ic_calendar"
                 app:layout_constraintTop_toBottomOf="@id/fechaTitle"
@@ -209,13 +211,12 @@
                 android:id="@+id/buttonGuardar"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/input_height"
-                android:backgroundTint="#2979FF"
                 android:padding="12dp"
                 android:layout_marginTop="@dimen/margin_vertical"
                 android:text="Guardar Factura"
-                android:textColor="#fff"
                 android:textSize="@dimen/text_size_body"
                 android:minWidth="@dimen/button_min_width"
+                style="@style/Widget.Viaticos.Button"
                 app:layout_constraintTop_toBottomOf="@id/fechaLayout"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
